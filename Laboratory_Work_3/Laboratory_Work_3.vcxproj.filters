@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Laboratory_Work_3.cpp">
+    <ClCompile Include="Исходные файлы\Laboratory_Work_3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Stack.h">
+    <ClInclude Include="Файлы заголовков\QueueRingBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="RingBuffer.h">
+    <ClInclude Include="Файлы заголовков\QueueTwoStacks.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="QueueRingBuffer.h">
+    <ClInclude Include="Файлы заголовков\RingBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="QueueTwoStacks.h">
+    <ClInclude Include="Файлы заголовков\Stack.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

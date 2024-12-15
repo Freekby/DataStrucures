@@ -1,16 +1,17 @@
- #include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <stdexcept>
 #include <limits>
-#include "Stack.h"
-#include "RingBuffer.h"
 #include "QueueRingBuffer.h"
 #include "QueueTwoStacks.h"
+#include "RingBuffer.h"
+#include "Stack.h"
+
 
 // TODO: Добавить .gitignore файл(добавлено)
 // TODO: Нужно убрать из отслеживания изменений git ВСЕ файлы, которые должны игнорироваться(исправлено)
-// TODO: Нахождения файлов в файловой системе отличается от Solution Explorer
+// TODO: Нахождения файлов в файловой системе отличается от Solution Explorer(исправлено)
 /**
  * @brief Функция для проверки ввода целого числа пользователем.
  * Функция запрашивает у пользователя ввод целого числа и продолжает запрос до тех пор,
@@ -19,7 +20,7 @@
  */
 int CheckValue() 
 {
-	std::cout << "Ваш ввод: ";
+	std::cout << "Your choose: ";
 
 	int value;
 	while (true) 
@@ -32,7 +33,7 @@ int CheckValue()
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Введено неверное значение. Повторите ввод: ";
+			std::cout << "Invalid value. Try again: ";
 		}
 	}
 }
@@ -43,16 +44,15 @@ int CheckValue()
 void Print(const std::vector<int>& data, const std::string& typeName)
 {
 	//typeName Имя типа данных. data Данные для отображения.
-	std::cout << std::endl << "Элементы " << typeName << ":" << std::endl;
+	std::cout << std::endl << "Elements " << typeName << ":" << std::endl;
 	for (int x : data)
 	{
 		std::cout << x << " ";
 	}
-
-	std::cout << std::endl << std::endl << "Выберите команду:" << std::endl;
-	std::cout << "0. Выйти в меню" << std::endl;
-	std::cout << "1. Добавить (Push/Enqueue) элемент в " << typeName << std::endl;
-	std::cout << "2. Достать (Pop/Dequeue) элемент из " << typeName << std::endl;
+	std::cout << std::endl << std::endl << "" << std::endl;
+	std::cout << "0. Exit to menu" << std::endl;
+	std::cout << "1. Add (Push/Enqueue) element to " << typeName << std::endl;
+	std::cout << "2. Pop (Pop/Dequeue) element from " << typeName << std::endl;
 }
 
 /**
@@ -76,7 +76,7 @@ void StackMenu()
 		case 1:
 		{
 			int value;
-			std::cout << "Введите значение для элемента: ";
+			std::cout << "Type value: ";
 			value = CheckValue();
 			stack->Push(value);
 			break;
@@ -85,27 +85,25 @@ void StackMenu()
 		{
 			try
 			{
-				std::cout << "Взятый элемент: " << stack->Pop() << std::endl;
+				std::cout << "Element: " << stack->Pop() << std::endl;
 			}
 			catch (const std::underflow_error& error)
 			{
-				std::cerr << "Ошибка: " << error.what() << std::endl;
+				std::cerr << "Error: " << error.what() << std::endl;
 			}
-
 			break;
 		}
 		case 0:
 		{
 			delete stack;
-			std::cout << "Меню" << std::endl;
+			std::cout << "Menu" << std::endl;
 			break;
 		}
 		default:
 		{
-			std::cout << "Неизвестное значение." << std::endl;
+			std::cout << "Unfinded value." << std::endl;
 		}
 		}
-
 	} while (choice != 0);
 }
 
@@ -125,8 +123,8 @@ void RingBufferMenu()
 
 		Print(bufferData, typeName);
 
-		std::cout << "3. Свободное место" << std::endl;
-		std::cout << "4. Занятое место" << std::endl;
+		std::cout << "3. Free place" << std::endl;
+		std::cout << "4. Filled place" << std::endl;
 
 		choice = CheckValue();
 		switch (choice)
@@ -136,7 +134,7 @@ void RingBufferMenu()
 			try
 			{
 				int value;
-				std::cout << "Введите значение для элемента: ";
+				std::cout << "Type value: ";
 				value = CheckValue();
 				buffer->Push(value);
 			}
@@ -150,37 +148,35 @@ void RingBufferMenu()
 		{
 			try
 			{
-				std::cout << "Взятый элемент: " << buffer->Pop() << std::endl;
+				std::cout << "Element: " << buffer->Pop() << std::endl;
 			}
 			catch (const std::underflow_error& error)
 			{
-				std::cerr << "Ошибка: " << error.what() << std::endl;
+				std::cerr << "Error: " << error.what() << std::endl;
 			}
-
 			break;
 		}
 		case 3:
 		{
-			std::cout << "Свободное место: " << buffer->FreePlace() << std::endl;
+			std::cout << "Free place: " << buffer->FreePlace() << std::endl;
 			break;
 		}
 		case 4:
 		{
-			std::cout << "Занятое место: " << buffer->FilledPlace() << std::endl;
+			std::cout << "Filled place: " << buffer->FilledPlace() << std::endl;
 			break;
 		}
 		case 0:
 		{
 			delete buffer;
-			std::cout << "Меню" << std::endl;
+			std::cout << "Menu" << std::endl;
 			break;
 		}
 		default:
 		{
-			std::cout << "Неизвестное значение." << std::endl;
+			std::cout << "Unfinded value." << std::endl;
 		}
 		}
-
 	} while (choice != 0);
 }
 
@@ -207,7 +203,7 @@ void QueueRingBufferMenu()
 			try
 			{
 				int value;
-				std::cout << "Введите значение для элемента: ";
+				std::cout << "Type value: ";
 				value = CheckValue();
 				queue->Enqueue(value);
 			}
@@ -221,23 +217,23 @@ void QueueRingBufferMenu()
 		{
 			try
 			{
-				std::cout << "Взятый элемент: " << queue->Dequeue() << std::endl;
+				std::cout << "Element: " << queue->Dequeue() << std::endl;
 			}
 			catch (const std::underflow_error& error)
 			{
-				std::cerr << "Ошибка: " << error.what() << std::endl;
+				std::cerr << "Error: " << error.what() << std::endl;
 			}
 			break;
 		}
 		case 0:
 		{
 			delete queue;
-			std::cout << "Выход в меню..." << std::endl;
+			std::cout << "Exit to menu..." << std::endl;
 			break;
 		}
 		default:
 		{
-			std::cout << "Неизвестное значение." << std::endl;
+			std::cout << "Unfinded value." << std::endl;
 		}
 		}
 	} while (choice != 0);
@@ -264,7 +260,7 @@ void QueueTwoStacksMenu()
 		case 1:
 		{
 			int value;
-			std::cout << "Введите значение для элемента: ";
+			std::cout << "Type value for element: ";
 			value = CheckValue();
 			queue->Enqueue(value);
 			break;
@@ -273,23 +269,23 @@ void QueueTwoStacksMenu()
 		{
 			try
 			{
-				std::cout << "Взятый элемент: " << queue->Dequeue() << std::endl;
+				std::cout << "Element: " << queue->Dequeue() << std::endl;
 			}
 			catch (const std::underflow_error& error)
 			{
-				std::cerr << "Ошибка: " << error.what() << std::endl;
+				std::cerr << "Error: " << error.what() << std::endl;
 			}
 			break;
 		}
 		case 0:
 		{
 			delete queue;
-			std::cout << "Выход в меню..." << std::endl;
+			std::cout << "Exit to menu..." << std::endl;
 			break;
 		}
 		default:
 		{
-			std::cout << "Неизвестная команда. Попробуйте еще раз." << std::endl;
+			std::cout << "Invalid command. Try again." << std::endl;
 		}
 		}
 	} while (choice != 0);
@@ -300,19 +296,18 @@ void QueueTwoStacksMenu()
 */
 int main()
 {
-	setlocale(LC_ALL, "");
-
+	setlocale(LC_ALL, "USA");
 	int menuChoice;
 	do
 	{
 		std::cout << std::endl;
-		std::cout << std::endl << "Лабораторная работа №3 АДС" << std::endl;
-		std::cout << std::endl << " Меню" << std::endl;
-		std::cout << "1. Стек" << std::endl;
-		std::cout << "2. Кольцевой буфер" << std::endl;
-		std::cout << "3. Очередь(кольцевой буфер)" << std::endl;
-		std::cout << "4. Очередь(два стека)" << std::endl;
-		std::cout << "0. Выход" << std::endl;
+		std::cout << std::endl << "Laboratory Work #3 " << std::endl;
+		std::cout << std::endl << " Menu" << std::endl;
+		std::cout << "1. Stack" << std::endl;
+		std::cout << "2. Ring Buffer" << std::endl;
+		std::cout << "3. Queue(RingBuffer)" << std::endl;
+		std::cout << "4. Queue(TwoStacks)" << std::endl;
+		std::cout << "0. Exit" << std::endl;
 
 		menuChoice = CheckValue();
 
@@ -340,12 +335,12 @@ int main()
 		}
 		case 0:
 		{
-			std::cout << "Выход из приложения" << std::endl;
+			std::cout << "Exit...." << std::endl;
 			break;
 		}
 		default:
 		{
-			std::cout << "Неизвестная команда. Попробуйте еще раз." << std::endl;
+			std::cout << "Invalid command. Try again." << std::endl;
 		}
 		}
 	} while (menuChoice != 0);
