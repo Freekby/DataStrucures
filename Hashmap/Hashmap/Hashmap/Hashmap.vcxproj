@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{10203aa5-133f-4168-a68d-8b71307d8cb4}</ProjectGuid>
-    <RootNamespace>LaboratoryWork3</RootNamespace>
+    <ProjectGuid>{ba7906ef-e483-480b-9874-4d5d8ccdd1d3}</ProjectGuid>
+    <RootNamespace>Hashmap</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,12 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicIncludeDirectories>C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Файлы заголовков;C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Исходные файлы;$(PublicIncludeDirectories)</PublicIncludeDirectories>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PublicIncludeDirectories>C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Файлы заголовков;C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Исходные файлы;$(PublicIncludeDirectories)</PublicIncludeDirectories>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -110,7 +104,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Файлы заголовков;C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Исходные файлы;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +118,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Файлы заголовков;C:\Users\скда\source\repos\DataStrucures\Laboratory_Work_3\Исходные файлы;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,13 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Исходные файлы\Laboratory_Work_3.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="DictionaryWrapper.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Файлы заголовков\QueueRingBuffer.h" />
-    <ClInclude Include="Файлы заголовков\QueueTwoStacks.h" />
-    <ClInclude Include="Файлы заголовков\RingBuffer.h" />
-    <ClInclude Include="Файлы заголовков\Stack.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="DictionaryWrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
