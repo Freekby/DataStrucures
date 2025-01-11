@@ -1,151 +1,57 @@
 ﻿#include "Dictionary.h"
-#include <cstring>
-// TODO: Имя файла не соответсвует имени класса
-HashTable::HashTable(size_t initialSize, double loadFactor)
-    : _size(initialSize), _maxLoadFactor(loadFactor), _count(0)
+#include <iostream>
+
+Dictionary::Dictionary(size_t initialSize, double loadFactor)
+    : _dictionary(initialSize, loadFactor) {}
+
+void Dictionary::Add(const std::string& key, const std::string& value)
 {
-    _table = new Node * [_size];
-    memset(_table, 0, _size * sizeof(Node*));
+    _dictionary.Insert(key, value);
 }
 
-HashTable::~HashTable()
+void Dictionary::Remove(const std::string& key)
 {
-    for (size_t i = 0; i < _size; ++i)
+    _dictionary.Remove(key);
+}
+
+std::string Dictionary::Find(const std::string& key)
+{
+    return _dictionary.Find(key);
+}
+
+// TODO: реализуемый метод наодится не в том cpp файле*
+void Dictionary::PrintState() const
+{
+    std::cout << "������� ��������� ���-�������:" << std::endl;
+    for (size_t i = 0; i < _dictionary.GetSize(); ++i)
     {
-        Node* current = _table[i];
-        while (current != nullptr)
+        std::cout << i << ": ";
+        Node *current = _dictionary.GetBucket(i);
+        if (current == nullptr)
         {
-            Node* next = current->next;
-            delete current;
-            current = next;
+            std::cout << "�����";
         }
+        else
+        {
+            while (current)
+            {
+                std::cout << "[" << current->key << ": " << current->value << "]";
+                if (current->next)
+                    std::cout << " -> ";
+                current = current->next;
+            }
+        }
+        std::cout << std::endl;
     }
 
-    delete[] _table;
-}
-
-size_t HashTable::GetHash(const std::string& key)
-{
-    size_t hashValue = 0;
-    // TODO: Дать осмысленное имя переменной c
-    for (char c : key)
+    std::cout << "������� (����� � ��������):" << std::endl;
+    for (size_t i = 0; i < _dictionary.GetSize(); ++i)
     {
-        // TODO: Магические числа. Вынести в константы (за циклом)
-        hashValue = (hashValue * 1664525) + static_cast<unsigned char>(c) + 1013904223;
-    }
-
-    return hashValue;
-}
-
-size_t HashTable::GetIndex(const std::string& key) const
-{
-    return GetHash(key) % _size;
-}
-
-void HashTable::Rehash()
-{
-    size_t oldSize = _size;
-    _size *= 2;
-    Node** newTable = new Node * [_size];
-    memset(newTable, 0, _size * sizeof(Node*));
-
-    for (size_t i = 0; i < oldSize; ++i)
-    {
-        Node* current = _table[i];
+        Node *current = _dictionary.GetBucket(i);
         while (current)
         {
-            size_t newIndex = GetIndex(current->key);
-            Node* next = current->next;
-
-            current->next = newTable[newIndex];
-            newTable[newIndex] = current;
-
-            current = next;
+            std::cout << current->key << ": " << current->value << std::endl;
+            current = current->next;
         }
     }
-
-    delete[] _table;
-    _table = newTable;
-}
-
-void HashTable::Insert(const std::string& key, const std::string& value)
-{
-    size_t index = GetIndex(key);
-
-    for (Node* current = _table[index]; current != nullptr; current = current->next)
-    {
-        if (current->key == key)
-        {
-            return;
-        }
-    }
-
-    Node* newNode = new Node(key, value);
-    newNode->next = _table[index];
-    _table[index] = newNode;
-    _count++;
-
-    if (static_cast<double>(_count) / _size >= _maxLoadFactor)
-    {
-        Rehash();
-    }
-}
-
-void HashTable::Remove(const std::string& key)
-{
-    size_t index = GetIndex(key);
-    Node* current = _table[index];
-    Node* prev = nullptr;
-
-    while (current != nullptr)
-    {
-        if (current->key == key)
-        {
-            if (prev != nullptr)
-            {
-                prev->next = current->next;
-            }
-            else
-            {
-                _table[index] = current->next;
-            }
-
-            delete current;
-            _count--;
-            return;
-        }
-
-        prev = current;
-        current = current->next;
-    }
-}
-
-std::string HashTable::Find(const std::string& key) const
-{
-    size_t index = GetIndex(key);
-
-    for (Node* current = _table[index]; current != nullptr; current = current->next)
-    {
-        if (current->key == key)
-        {
-            return current->value;
-        }
-    }
-
-    return "";
-}
-
-size_t HashTable::GetSize() const
-{
-    return _size;
-}
-
-size_t HashTable::GetCount() const
-{
-    return _count;
-}
-
-Node* HashTable::GetBucket(size_t index) const
-{
-    return _table[index];
 }
