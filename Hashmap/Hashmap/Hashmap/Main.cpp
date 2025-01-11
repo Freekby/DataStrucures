@@ -51,6 +51,7 @@ int CheckValue()
 	}
 }
 
+// TODO: реализуемый метод наодится не в том cpp файле
 void DictionaryWrapper::PrintState() const
 {
 	std::cout << "������� ��������� ���-�������:" << std::endl;
