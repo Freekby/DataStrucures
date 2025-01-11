@@ -52,11 +52,8 @@ int CheckValue()
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    // TODO: Нет очистки памяти для этого объекта
-    Dictionary *dict = new Dictionary();
 
     int choice;
-    // TODO: Определять переменные на отдельных строках
     string key;
     string value;
 

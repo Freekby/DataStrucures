@@ -1,8 +1,7 @@
 #pragma once
 #include "HashTable.h"
 #include <string>
-// TODO: Исправить кодировку комментариев
-// TODO: Это не является оберткой, это должен быть словарь (Dictionary)
+
 /// <summary>
 /// Описание класса для работы со словарем.
 /// </summary>

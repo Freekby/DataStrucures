@@ -19,9 +19,11 @@ std::string Dictionary::Find(const std::string& key)
     return _dictionary.Find(key);
 }
 
-// TODO: реализуемый метод наодится не в том cpp файле*
 void Dictionary::PrintState() const
 {
+    // TODO: работа с пользователем не должна быть в логике...
+    // Вы можете вынести в Main, но отвязать от класса и добавить аргумент в виде словаря,
+    // чтобы решить эту проблему
     std::cout << "������� ��������� ���-�������:" << std::endl;
     for (size_t i = 0; i < _dictionary.GetSize(); ++i)
     {
