@@ -1,6 +1,6 @@
 ﻿#include "Dictionary.h"
 #include <cstring>
-
+// TODO: Имя файла не соответсвует имени класса
 HashTable::HashTable(size_t initialSize, double loadFactor)
     : _size(initialSize), _maxLoadFactor(loadFactor), _count(0)
 {
@@ -27,8 +27,10 @@ HashTable::~HashTable()
 size_t HashTable::GetHash(const std::string& key)
 {
     size_t hashValue = 0;
+    // TODO: Дать осмысленное имя переменной c
     for (char c : key)
     {
+        // TODO: Магические числа. Вынести в константы (за циклом)
         hashValue = (hashValue * 1664525) + static_cast<unsigned char>(c) + 1013904223;
     }
 

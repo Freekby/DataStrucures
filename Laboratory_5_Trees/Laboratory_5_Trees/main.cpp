@@ -44,8 +44,7 @@ int main()
 {
     BinaryTree *binaryTree = new BinaryTree(50); 
     Treap *treap = new Treap();
-    setlocale(LC_ALL, "Russian");
-
+    setlocale(LC_ALL, "ru_RU.UTF-8");
     srand(static_cast<unsigned>(time(0))); 
 
     int choice, key;
