@@ -45,6 +45,7 @@ int main()
 
     BinaryTree *binaryTree = new BinaryTree(50); 
     Treap *treap = new Treap();
+    TreapNode* root = treap->GetRoot();
 
     int choice;
     int key;
@@ -135,14 +136,14 @@ int main()
             case 6:
                 std::cout << "Введите ключ для добавления в Treap: ";
                 std::cin >> key;
-                treap->Insert(key);
+                treap->Insert(root, key);
                 std::cout << "Элемент добавлен в Treap." << std::endl;
                 break;
 
             case 7:
                 std::cout << "Введите ключ для удаления из Treap: ";
                 std::cin >> key;
-                treap->Remove(key);
+                treap->Remove(root, key);
                 std::cout << "Элемент удалён из Treap." << std::endl;
                 break;
 

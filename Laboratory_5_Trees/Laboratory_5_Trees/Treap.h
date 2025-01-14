@@ -18,7 +18,7 @@ private:
     /// <param name="key">Ключ для разделения.</param>
     /// <param name="left">Левый узел.</param>
     /// <param name="right">Правый узел.</param>
-    void split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right)
+    void Split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right)
     {
         if (node == nullptr)
         {
@@ -26,12 +26,12 @@ private:
         }
         else if (node->key <= key)
         {
-            split(node->right, key, node->right, right);
+            Split(node->right, key, node->right, right);
             left = node;
         }
         else
         {
-            split(node->left, key, left, node->left);
+            Split(node->left, key, left, node->left);
             right = node;
         }
     }
@@ -42,7 +42,7 @@ private:
     /// <param name="left">Первый узел для объединения.</param>
     /// <param name="right">Второй узел для объединения.</param>
     /// <returns></returns>
-    TreapNode* merge(TreapNode* left, TreapNode* right)
+    TreapNode* Merge(TreapNode* left, TreapNode* right)
     {
         if (left == nullptr || right == nullptr)
         {
@@ -51,11 +51,19 @@ private:
 
         if (left->priority > right->priority)
         {
-            left->right = merge(left->right, right);
+            left->right = Merge(left->right, right);
             return left;
         }
-        right->left = merge(left, right->left);
+
+        right->left = Merge(left, right->left);
         return right;
+    }
+
+public:
+
+    TreapNode* GetRoot() 
+    {
+        return _root;
     }
 
     /// <summary>
@@ -63,34 +71,33 @@ private:
     /// </summary>
     /// <param name="node">Узел для вставки.</param>
     /// <param name="key">Ключ для вставки.</param>
-    void insert(TreapNode*& node, int key)
+    void Insert(TreapNode*& node, int key)
     {
-        if (node == nullptr)
+        if (!node)
         {
             node = new TreapNode(key);
+            node->key = key;
             return;
         }
 
-        if (key < node->key)
+        TreapNode* newNode = new TreapNode(key);
+
+        if (node->priority > newNode->priority)
         {
-            insert(node->left, key);
-            if (node->left->priority > node->priority)
+            if (key < node->key)
             {
-                node = merge(node->left, node);
+                Insert(node->left, key);
             }
-        }
-        else if (key > node->key)
-        {
-            insert(node->right, key);
-            if (node->right->priority > node->priority)
+            else
             {
-                node = merge(node, node->right);
+                Insert(node->right, key);
             }
+            return;
         }
-        else
-        {
-            throw "Duplicate keys are not allowed.";
-        }
+
+        newNode->key = key;
+        Split(node, key, newNode->left, newNode->right);
+        node = newNode;
     }
 
     /// <summary>
@@ -98,47 +105,56 @@ private:
     /// </summary>
     /// <param name="node">Узел для удаления</param>
     /// <param name="key">Ключ для удаления.</param>
-    void remove(TreapNode*& node, int key)
+    void Remove(TreapNode*& node, int key)
     {
-        if (node == nullptr)
+        if (!node)
         {
-            throw "Key not found.";
+            return;
         }
 
-        if (key < node->key)
+        if (key > node->key)
         {
-            remove(node->left, key);
+            Remove(node->right, key);
         }
-        else if (key > node->key)
+        else if (key < node->key)
         {
-            remove(node->right, key);
+            Remove(node->left, key);
         }
         else
         {
             TreapNode* temp = node;
-            node = merge(node->left, node->right);
+            node = Merge(node->left, node->right);
+
             delete temp;
         }
     }
 
-public:
+    void InsertNotOptimized(TreapNode*& node, int key)
+    {
+        TreapNode* newNode = new TreapNode(key);
+        TreapNode* less = nullptr;
+        TreapNode* bigger = nullptr;
+        Split(node, key, less, bigger);
+        node = Merge(Merge(less, newNode), bigger);
+    }
+
+    void RemoveNotOptimized(TreapNode*& node, int key, bool& success)
+    {
+        TreapNode* less = nullptr;
+        TreapNode* equal = nullptr;
+        TreapNode* bigger = nullptr;
+
+        Split(node, key, less, bigger);
+        Split(bigger, key + 1, equal, bigger);
+        if (!equal)
+        {
+            success = false;
+        }
+
+        node = Merge(less, bigger);
+        delete equal;
+    }
+
+
     Treap() : _root(nullptr) {}
-
-    /// <summary>
-    /// Вставляет элемент в дерево
-    /// </summary>
-    /// <param name="key">Ключ для втавки.</param>
-    void Insert(int key)
-    {
-        insert(_root, key);
-    }
-
-    /// <summary>
-    /// удаляет элемент из дерева.
-    /// </summary>
-    /// <param name="key">Ключ для вставки.</param>
-    void Remove(int key)
-    {
-        remove(_root, key);
-    }
 };
