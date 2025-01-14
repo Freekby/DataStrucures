@@ -2,25 +2,7 @@
 
 #include <string>
 #include <iostream>
-
-/// <summary>
-/// Структура для представления узла в хеш-таблице.
-/// </summary>
-// TODO: Один файл должен содержать один класс или структуру
-struct Node 
-{
-    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary
-    std::string key; ///< Ключ узла.
-    std::string value; ///< Значение узла.
-    Node* next; ///< Указатель на следующий узел.
-
-    /// <summary>
-    /// Конструктор для создания узла.
-    /// </summary>
-    /// <param name="k">Ключ.</param>
-    /// <param name="v">Значение.</param>
-    Node(const std::string& k, const std::string& v) : key(k), value(v), next(nullptr) {}
-};
+#include "Node.h"
 
 /// <summary>
 /// Класс HashTable представляет хеш-таблицу.
@@ -28,18 +10,25 @@ struct Node
 class HashTable 
 {
 private:
-    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary
-    Node** _table; ///< Указатель на массив узлов.
-    size_t _size; ///< Размер хеш-таблицы.
-    double _maxLoadFactor; ///< Максимальный коэффициент загрузки.
-    size_t _count; ///< Количество элементов в хеш-таблице.
+    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary*
 
     /// <summary>
-    /// Получает индекс для заданного ключа.
+    /// Указатель на массив узлов
     /// </summary>
-    /// <param name="key">Ключ.</param>
-    /// <returns>Индекс в хеш-таблице.</returns>
-    size_t GetIndex(const std::string& key) const;
+    Node** _table;
+    /// <summary>
+    /// Размер хеш-таблицы.
+    /// </summary>
+    size_t _size;
+    /// <summary>
+    /// Максимальный коэффициент загрузки.
+    /// </summary>
+    double _maxLoadFactor;
+    /// <summary>
+    /// Количество элементов в хеш-таблице.
+    /// </summary>
+    size_t _count;
+
 
     /// <summary>
     /// Перераспределяет элементы в хеш-таблице.
@@ -47,6 +36,13 @@ private:
     void Rehash();
 
 public:
+    /// <summary>
+    /// Получает индекс для заданного ключа.
+    /// </summary>
+    /// <param name="key">Ключ.</param>
+    /// <returns>Индекс в хеш-таблице.</returns>
+    size_t GetIndex(const std::string& key) const;
+
     /// <summary>
     /// Конструктор для создания хеш-таблицы.
     /// </summary>

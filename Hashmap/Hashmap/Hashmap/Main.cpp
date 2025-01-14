@@ -4,14 +4,55 @@
 #include <string>
 
 using namespace std;
-// TODO: Обнаружена проблема с кодировкой
-/// <summary> /// Эта функция проверяет значение, введенное пользователем. 
+
+void PrintState(Dictionary *dict)
+{
+    // TODO: работа с пользователем не должна быть в логике...
+    // Вы можете вынести в Main, но отвязать от класса и добавить аргумент в виде словаря,
+    // чтобы решить эту проблему*
+    std::cout << "Значения хэш-таблицы:" << std::endl;
+    for (size_t i = 0; i < dict->GetSize(); ++i)
+    {
+        std::cout << i << ": ";
+        Node* current = dict->GetBucket(i);
+        if (current == nullptr)
+        {
+            std::cout << "пусто";
+        }
+        else
+        {
+            while (current)
+            {
+                std::cout << "[" << current->key << ": " << current->value << "]";
+                if (current->next)
+                    std::cout << " -> ";
+                current = current->next;
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << "Значения Словаря" << std::endl;
+    for (size_t i = 0; i < dict->GetSize(); ++i)
+    {
+        Node* current = dict->GetBucket(i);
+        while (current)
+        {
+            std::cout << current->key << ": " << current->value << std::endl;
+            current = current->next;
+        }
+    }
+}
+
+// TODO: Обнаружена проблема с кодировкой*
+/// <summary> 
+/// Эта функция проверяет значение, введенное пользователем. 
 /// Она гарантирует, что ввод является допустимым целым числом и запрашивает пользователя, пока не будет получен допустимый ввод. 
 /// </summary>
 /// <returns>Проверенное целое значение, введенное пользователем.</returns>
 int CheckValue()
 {
-    cout << "Введите значение: ";
+    cout << "Введите ваш выбор: ";
 
     string input;
     while (true)
@@ -51,7 +92,9 @@ int CheckValue()
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+
+    Dictionary* dict = new Dictionary();
 
     int choice;
     string key;
@@ -66,9 +109,7 @@ int main()
         cout << "4. Добавить запись с ключом" << endl;
         cout << "5. Добавить несколько записей" << endl;
         cout << "0. Выход" << endl;
-        dict->PrintState();
-
-        cout << "Введите ваш выбор: ";
+        PrintState(dict);
         
         choice = CheckValue();
         switch (choice)

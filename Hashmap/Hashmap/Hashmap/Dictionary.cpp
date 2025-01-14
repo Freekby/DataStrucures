@@ -6,6 +6,17 @@ Dictionary::Dictionary(size_t initialSize, double loadFactor)
 
 void Dictionary::Add(const std::string& key, const std::string& value)
 {
+    size_t index = _dictionary.GetIndex(key);
+
+    // TODO: Вынести в Dictionary.Add*
+    for (Node* current = _dictionary.GetBucket(index); current != nullptr; current = current->next)
+    {
+        if (current->key == key)
+        {
+            return;
+        }
+    }
+
     _dictionary.Insert(key, value);
 }
 
@@ -19,41 +30,13 @@ std::string Dictionary::Find(const std::string& key)
     return _dictionary.Find(key);
 }
 
-void Dictionary::PrintState() const
+size_t Dictionary::GetSize()
 {
-    // TODO: работа с пользователем не должна быть в логике...
-    // Вы можете вынести в Main, но отвязать от класса и добавить аргумент в виде словаря,
-    // чтобы решить эту проблему
-    std::cout << "������� ��������� ���-�������:" << std::endl;
-    for (size_t i = 0; i < _dictionary.GetSize(); ++i)
-    {
-        std::cout << i << ": ";
-        Node *current = _dictionary.GetBucket(i);
-        if (current == nullptr)
-        {
-            std::cout << "�����";
-        }
-        else
-        {
-            while (current)
-            {
-                std::cout << "[" << current->key << ": " << current->value << "]";
-                if (current->next)
-                    std::cout << " -> ";
-                current = current->next;
-            }
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << "������� (����� � ��������):" << std::endl;
-    for (size_t i = 0; i < _dictionary.GetSize(); ++i)
-    {
-        Node *current = _dictionary.GetBucket(i);
-        while (current)
-        {
-            std::cout << current->key << ": " << current->value << std::endl;
-            current = current->next;
-        }
-    }
+    return _dictionary.GetSize();
 }
+
+Node* Dictionary::GetBucket(size_t index) const
+{
+    return _dictionary.GetBucket(index);
+}
+

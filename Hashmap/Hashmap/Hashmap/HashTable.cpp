@@ -26,16 +26,9 @@ HashTable::~HashTable()
 
 size_t HashTable::GetHash(const std::string& key)
 {
+    // TODO: RSDN + комментарии константам внутри метода не нужны*
     size_t hashValue = 0;
-    // TODO: RSDN + комментарии константам внутри метода не нужны
-    /// <summary> 
-    /// Первая константа, используемая в хеш-функции (метод Пирсена). 
-    /// </summary>
     const size_t HashConstant1 = 1664525;
-
-    /// <summary> 
-    /// Вторая константа, используемая в хеш-функции (метод Пирсена). 
-    /// </summary>
     const size_t HashConstant2 = 1013904223;
 
     // TODO: Дать осмысленное имя переменной c
@@ -82,14 +75,7 @@ void HashTable::Insert(const std::string& key, const std::string& value)
 {
     size_t index = GetIndex(key);
 
-    // TODO: Вынести в Dictionary.Add
-    for (Node* current = _table[index]; current != nullptr; current = current->next)
-    {
-        if (current->key == key)
-        {
-            return;
-        }
-    }
+
 
     Node* newNode = new Node(key, value);
     newNode->next = _table[index];

@@ -8,8 +8,11 @@
 class Dictionary
 {
 private:
-    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary
-    HashTable _dictionary; // Хранит данные словаря.
+    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary*
+    /// <summary>
+    /// Хранит данные словаря.
+    /// </summary>
+    HashTable _dictionary;
 
 public:
     /// <summary>
@@ -40,7 +43,15 @@ public:
     std::string Find(const std::string& key);
 
     /// <summary>
-    /// Печатает текущее состояние словаря.
+    /// Возвращает размер словаря.
     /// </summary>
-    void PrintState() const;
+    /// <returns>Размер словаря.</returns>
+    size_t GetSize();
+
+    /// <summary>
+    /// Получает указатель на ведро по индексу.
+    /// </summary>
+    /// <param name="index">Индекс.</param>
+    /// <returns>Указатель на ведро.</returns>
+    Node* GetBucket(size_t index) const;
 };
