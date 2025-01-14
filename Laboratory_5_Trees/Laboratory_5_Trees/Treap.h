@@ -6,9 +6,19 @@
 class Treap
 {
 private:
-    TreapNode* root;
+    /// <summary>
+    /// Корень дерева.
+    /// </summary>
+    TreapNode* _root;
 
-    void Split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right)
+    /// <summary>
+    /// Разделяет дерево.
+    /// </summary>
+    /// <param name="node">Узел для разделения</param>
+    /// <param name="key">Ключ для разделения.</param>
+    /// <param name="left">Левый узел.</param>
+    /// <param name="right">Правый узел.</param>
+    void split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right)
     {
         if (node == nullptr)
         {
@@ -16,34 +26,44 @@ private:
         }
         else if (node->key <= key)
         {
-            Split(node->right, key, node->right, right);
+            split(node->right, key, node->right, right);
             left = node;
         }
         else
         {
-            Split(node->left, key, left, node->left);
+            split(node->left, key, left, node->left);
             right = node;
         }
     }
 
-    TreapNode* Merge(TreapNode* left, TreapNode* right)
+    /// <summary>
+    /// Объединяет деревья.
+    /// </summary>
+    /// <param name="left">Первый узел для объединения.</param>
+    /// <param name="right">Второй узел для объединения.</param>
+    /// <returns></returns>
+    TreapNode* merge(TreapNode* left, TreapNode* right)
     {
-        if (left == nullptr) return right;
-        if (right == nullptr) return left;
+        if (left == nullptr || right == nullptr)
+        {
+            return left == nullptr ? right : left;
+        }
 
         if (left->priority > right->priority)
         {
-            left->right = Merge(left->right, right);
+            left->right = merge(left->right, right);
             return left;
         }
-        else
-        {
-            right->left = Merge(left, right->left);
-            return right;
-        }
+        right->left = merge(left, right->left);
+        return right;
     }
 
-    void Insert(TreapNode*& node, int key)
+    /// <summary>
+    /// вставляет элемент в дерево.
+    /// </summary>
+    /// <param name="node">Узел для вставки.</param>
+    /// <param name="key">Ключ для вставки.</param>
+    void insert(TreapNode*& node, int key)
     {
         if (node == nullptr)
         {
@@ -53,18 +73,18 @@ private:
 
         if (key < node->key)
         {
-            Insert(node->left, key);
+            insert(node->left, key);
             if (node->left->priority > node->priority)
             {
-                node = Merge(node->left, node);
+                node = merge(node->left, node);
             }
         }
         else if (key > node->key)
         {
-            Insert(node->right, key);
+            insert(node->right, key);
             if (node->right->priority > node->priority)
             {
-                node = Merge(node, node->right);
+                node = merge(node, node->right);
             }
         }
         else
@@ -73,7 +93,12 @@ private:
         }
     }
 
-    void Remove(TreapNode*& node, int key)
+    /// <summary>
+    /// удаляет элемент из дерева.
+    /// </summary>
+    /// <param name="node">Узел для удаления</param>
+    /// <param name="key">Ключ для удаления.</param>
+    void remove(TreapNode*& node, int key)
     {
         if (node == nullptr)
         {
@@ -82,46 +107,38 @@ private:
 
         if (key < node->key)
         {
-            Remove(node->left, key);
+            remove(node->left, key);
         }
         else if (key > node->key)
         {
-            Remove(node->right, key);
+            remove(node->right, key);
         }
         else
         {
             TreapNode* temp = node;
-            node = Merge(node->left, node->right);
+            node = merge(node->left, node->right);
             delete temp;
         }
     }
 
-    void Inorder(TreapNode* node)
-    {
-        if (node != nullptr)
-        {
-            Inorder(node->left);
-            std::cout << node->key << " ";
-            Inorder(node->right);
-        }
-    }
-
 public:
-    Treap() : root(nullptr) {}
+    Treap() : _root(nullptr) {}
 
+    /// <summary>
+    /// Вставляет элемент в дерево
+    /// </summary>
+    /// <param name="key">Ключ для втавки.</param>
     void Insert(int key)
     {
-        Insert(root, key);
+        insert(_root, key);
     }
 
+    /// <summary>
+    /// удаляет элемент из дерева.
+    /// </summary>
+    /// <param name="key">Ключ для вставки.</param>
     void Remove(int key)
     {
-        Remove(root, key);
-    }
-
-    void Inorder()
-    {
-        Inorder(root);
-        std::cout << std::endl;
+        remove(_root, key);
     }
 };

@@ -1,12 +1,11 @@
 ﻿#include <iostream>
-#include <cstdlib> // Для rand()
+#include <cstdlib>
 #include <ctime>
 #include "BinaryTree.h"
 #include "Treap.h"
 
 int CheckValue()
 {
-    std::cout << "Your choose: ";
 
     int value;
     while (true)
@@ -19,7 +18,7 @@ int CheckValue()
         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid value. Try again: ";
+            std::cout << "Некорректное значение, введите ещё раз: ";
         }
     }
 }
@@ -34,7 +33,6 @@ void Menu()
     std::cout << "5. Найти максимум в BinaryTree" << std::endl;
     std::cout << "6. Добавить элемент в Treap" << std::endl;
     std::cout << "7. Удалить элемент из Treap" << std::endl;
-    std::cout << "8. Показать элементы Treap (Inorder)" << std::endl;
     std::cout << "0. Выход" << std::endl;
     std::cout << "===================" << std::endl;
     
@@ -42,27 +40,30 @@ void Menu()
 
 int main() 
 {
-    BinaryTree *binaryTree = new BinaryTree(50); 
-    Treap *treap = new Treap();
-    setlocale(LC_ALL, "ru_RU.UTF-8");
+    setlocale(LC_ALL, "ru_RU");
     srand(static_cast<unsigned>(time(0))); 
 
-    int choice, key;
+    BinaryTree *binaryTree = new BinaryTree(50); 
+    Treap *treap = new Treap();
+
+    int choice;
+    int key;
 
     do {
         Menu();
-        std::cout << "Элементы бинарного дерева:";
-        binaryTree->InorderTraversal();
         std::cout << "Введите ваш выбор: ";
         choice = CheckValue();
 
-
-        try {
-            switch (choice) {
+        try 
+        {
+            switch (choice) 
+            {
             case 1:
                 std::cout << "Введите ключ для добавления в BinaryTree: ";
+
                 key = CheckValue();
-                binaryTree->AddElement(key, binaryTree->_root);
+                binaryTree->AddElement(key, binaryTree->GetRoot());
+
                 std::cout << "Элемент добавлен в BinaryTree." << std::endl;
                 break;
 
@@ -70,10 +71,10 @@ int main()
                 std::cout << "Введите ключ для удаления из BinaryTree: ";
                 key = CheckValue();
                 {
-                    BinaryTreeNode* node = binaryTree->Find(key, binaryTree->_root);
+                    BinaryTreeNode* node = binaryTree->Find(key, binaryTree->GetRoot());
                     if (node) 
                     {
-                        binaryTree->RemoveElement(node);
+                        binaryTree->RemoveElement(node, node->data);
                         std::cout << "Элемент удалён из BinaryTree." << std::endl;
                     }
                     else 
@@ -87,7 +88,8 @@ int main()
             case 3:
                 std::cout << "Введите ключ для поиска в BinaryTree: ";
                 key = CheckValue();
-                if (binaryTree->Find(key, binaryTree->_root)) 
+
+                if (binaryTree->Find(key, binaryTree->GetRoot())) 
                 {
                     std::cout << "Элемент найден в BinaryTree." << std::endl;
                 }
@@ -100,7 +102,7 @@ int main()
 
             case 4:
             {
-                BinaryTreeNode* minNode = binaryTree->FindMin(binaryTree->_root);
+                BinaryTreeNode* minNode = binaryTree->FindMin(binaryTree->GetRoot());
                 if (minNode) 
                 {
                     std::cout << "Минимальный элемент в BinaryTree: " << minNode->data << std::endl;
@@ -116,7 +118,7 @@ int main()
 
             case 5:
             {
-                BinaryTreeNode* maxNode = binaryTree->FindMax(binaryTree->_root);
+                BinaryTreeNode* maxNode = binaryTree->FindMax(binaryTree->GetRoot());
                 if (maxNode) 
                 {
                     std::cout << "Максимальный элемент в BinaryTree: " << maxNode->data << std::endl;
@@ -144,11 +146,6 @@ int main()
                 std::cout << "Элемент удалён из Treap." << std::endl;
                 break;
 
-            case 8:
-                std::cout << "Элементы Treap (Inorder): ";
-                treap->Inorder();
-                break;
-
             case 0:
                 std::cout << "Выход из программы." << std::endl;
                 break;
@@ -158,7 +155,8 @@ int main()
                 break;
             }
         }
-        catch (const char* err) {
+        catch (const char* err) 
+        {
             std::cout << "Ошибка: " << err << std::endl;
         }
 
