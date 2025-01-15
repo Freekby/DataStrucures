@@ -4,30 +4,30 @@
 struct BinaryTreeNode
 {
 	/// <summary>
-	/// Данные в узле.
+	/// Р”Р°РЅРЅС‹Рµ РІ СѓР·Р»Рµ.
 	/// </summary>
 	int data;
 	/// <summary>
-	/// Левый узел.
+	/// Р›РµРІС‹Р№ СѓР·РµР».
 	/// </summary>
 	BinaryTreeNode* left;
 	/// <summary>
-	/// Правый узел.
+	/// РџСЂР°РІС‹Р№ СѓР·РµР».
 	/// </summary>
 	BinaryTreeNode* right;
 	/// <summary>
-	/// Родительский узел.
+	/// Р РѕРґРёС‚РµР»СЊСЃРєРёР№ СѓР·РµР».
 	/// </summary>
 	BinaryTreeNode* parent;
 
 	/// <summary>
-	/// Конструктор класса.
+	/// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР°.
 	/// </summary>
 	/// <param name="data"></param>
 	BinaryTreeNode(int data) : data(data), left(nullptr), right(nullptr), parent(nullptr) {}
 
 	/// <summary>
-	/// Деструктор класса.
+	/// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР°.
 	/// </summary>
 	~BinaryTreeNode() {}
 };
