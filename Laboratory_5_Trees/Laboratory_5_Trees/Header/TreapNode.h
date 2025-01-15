@@ -22,6 +22,6 @@ struct TreapNode
     /// <summary>
     /// Конструктор класса.
     /// </summary>
-    /// <param name="k">����.</param>
+    /// <param name="k">Ключ.</param>
     TreapNode(int k) : key(k), priority(10), left(nullptr), right(nullptr) {}
 };

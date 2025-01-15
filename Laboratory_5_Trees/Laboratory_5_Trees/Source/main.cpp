@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "BinaryTree.h"
-#include "Treap.h"
+#include "../Header/BinaryTree.h"
+#include "../Header/Treap.h"
 
 int CheckValue()
 {

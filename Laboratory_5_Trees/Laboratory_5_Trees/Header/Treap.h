@@ -67,7 +67,7 @@ public:
     }
 
     /// <summary>
-    /// вставляет элемент в дерево.
+    /// Вставляет элемент в дерево.
     /// </summary>
     /// <param name="node">Узел для вставки.</param>
     /// <param name="key">Ключ для вставки.</param>
@@ -101,7 +101,7 @@ public:
     }
 
     /// <summary>
-    /// удаляет элемент из дерева.
+    /// Удаляет элемент из дерева.
     /// </summary>
     /// <param name="node">Узел для удаления</param>
     /// <param name="key">Ключ для удаления.</param>
@@ -129,6 +129,11 @@ public:
         }
     }
 
+    /// <summary>
+    /// Вставляет элемент в дерево. (не оптимизирован)
+    /// </summary>
+    /// <param name="node">Узел для вставки.</param>
+    /// <param name="key">Ключ для вставки.</param>
     void InsertNotOptimized(TreapNode*& node, int key)
     {
         TreapNode* newNode = new TreapNode(key);
@@ -138,6 +143,11 @@ public:
         node = Merge(Merge(less, newNode), bigger);
     }
 
+    /// <summary>
+    /// Удаляет элемент из дерева. (не оптимизирован)
+    /// </summary>
+    /// <param name="node">Узел для удаления</param>
+    /// <param name="key">Ключ для удаления.</param>
     void RemoveNotOptimized(TreapNode*& node, int key, bool& success)
     {
         TreapNode* less = nullptr;
