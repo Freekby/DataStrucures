@@ -1,5 +1,5 @@
-#include "HashTable.h"
-#include "Dictionary.h"
+#include "../Header/HashTable.h"
+#include "../Header/Dictionary.h"
 #include <iostream>
 #include <string>
 
@@ -7,9 +7,6 @@ using namespace std;
 
 void PrintState(Dictionary *dict)
 {
-    // TODO: работа с пользователем не должна быть в логике...
-    // Вы можете вынести в Main, но отвязать от класса и добавить аргумент в виде словаря,
-    // чтобы решить эту проблему*
     std::cout << "Значения хэш-таблицы:" << std::endl;
     for (size_t i = 0; i < dict->GetSize(); ++i)
     {
@@ -44,7 +41,6 @@ void PrintState(Dictionary *dict)
     }
 }
 
-// TODO: Обнаружена проблема с кодировкой*
 /// <summary> 
 /// Эта функция проверяет значение, введенное пользователем. 
 /// Она гарантирует, что ввод является допустимым целым числом и запрашивает пользователя, пока не будет получен допустимый ввод. 

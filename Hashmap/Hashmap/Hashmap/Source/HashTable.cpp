@@ -1,4 +1,4 @@
-﻿#include "HashTable.h"
+﻿#include "../Header/HashTable.h"
 #include <cstring>
 
 HashTable::HashTable(size_t initialSize, double loadFactor)
@@ -26,15 +26,13 @@ HashTable::~HashTable()
 
 size_t HashTable::GetHash(const std::string& key)
 {
-    // TODO: RSDN + комментарии константам внутри метода не нужны*
     size_t hashValue = 0;
     const size_t HashConstant1 = 1664525;
     const size_t HashConstant2 = 1013904223;
 
-    // TODO: Дать осмысленное имя переменной c
-    for (char c : key)
+    for (char symbol : key)
     {
-        hashValue = (hashValue * HashConstant1) + static_cast<unsigned char>(c) + HashConstant2;
+        hashValue = (hashValue * HashConstant1) + static_cast<unsigned char>(symbol) + HashConstant2;
     }
 
     return hashValue;

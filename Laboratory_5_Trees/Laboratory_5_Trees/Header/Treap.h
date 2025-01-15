@@ -3,21 +3,22 @@
 
 #include "TreapNode.h"
 
+// TODO: РљРѕРјРјРµРЅС‚Р°СЂРёРё
 class Treap
 {
 private:
     /// <summary>
-    /// Корень дерева.
+    /// РљРѕСЂРµРЅСЊ РґРµСЂРµРІР°.
     /// </summary>
     TreapNode* _root;
 
     /// <summary>
-    /// Разделяет дерево.
+    /// Р Р°Р·РґРµР»СЏРµС‚ РґРµСЂРµРІРѕ.
     /// </summary>
-    /// <param name="node">Узел для разделения</param>
-    /// <param name="key">Ключ для разделения.</param>
-    /// <param name="left">Левый узел.</param>
-    /// <param name="right">Правый узел.</param>
+    /// <param name="node">РЈР·РµР» РґР»СЏ СЂР°Р·РґРµР»РµРЅРёСЏ</param>
+    /// <param name="key">РљР»СЋС‡ РґР»СЏ СЂР°Р·РґРµР»РµРЅРёСЏ.</param>
+    /// <param name="left">Р›РµРІС‹Р№ СѓР·РµР».</param>
+    /// <param name="right">РџСЂР°РІС‹Р№ СѓР·РµР».</param>
     void Split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right)
     {
         if (node == nullptr)
@@ -37,10 +38,10 @@ private:
     }
 
     /// <summary>
-    /// Объединяет деревья.
+    /// РћР±СЉРµРґРёРЅСЏРµС‚ РґРµСЂРµРІСЊСЏ.
     /// </summary>
-    /// <param name="left">Первый узел для объединения.</param>
-    /// <param name="right">Второй узел для объединения.</param>
+    /// <param name="left">РџРµСЂРІС‹Р№ СѓР·РµР» РґР»СЏ РѕР±СЉРµРґРёРЅРµРЅРёСЏ.</param>
+    /// <param name="right">Р’С‚РѕСЂРѕР№ СѓР·РµР» РґР»СЏ РѕР±СЉРµРґРёРЅРµРЅРёСЏ.</param>
     /// <returns></returns>
     TreapNode* Merge(TreapNode* left, TreapNode* right)
     {
@@ -67,10 +68,10 @@ public:
     }
 
     /// <summary>
-    /// Вставляет элемент в дерево.
+    /// Р’СЃС‚Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РґРµСЂРµРІРѕ.
     /// </summary>
-    /// <param name="node">Узел для вставки.</param>
-    /// <param name="key">Ключ для вставки.</param>
+    /// <param name="node">РЈР·РµР» РґР»СЏ РІСЃС‚Р°РІРєРё.</param>
+    /// <param name="key">РљР»СЋС‡ РґР»СЏ РІСЃС‚Р°РІРєРё.</param>
     void Insert(TreapNode*& node, int key)
     {
         if (!node)
@@ -101,10 +102,10 @@ public:
     }
 
     /// <summary>
-    /// Удаляет элемент из дерева.
+    /// РЈРґР°Р»СЏРµС‚ СЌР»РµРјРµРЅС‚ РёР· РґРµСЂРµРІР°.
     /// </summary>
-    /// <param name="node">Узел для удаления</param>
-    /// <param name="key">Ключ для удаления.</param>
+    /// <param name="node">РЈР·РµР» РґР»СЏ СѓРґР°Р»РµРЅРёСЏ</param>
+    /// <param name="key">РљР»СЋС‡ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ.</param>
     void Remove(TreapNode*& node, int key)
     {
         if (!node)
@@ -130,10 +131,10 @@ public:
     }
 
     /// <summary>
-    /// Вставляет элемент в дерево. (не оптимизирован)
+    /// Р’СЃС‚Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РґРµСЂРµРІРѕ. (РЅРµ РѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅ)
     /// </summary>
-    /// <param name="node">Узел для вставки.</param>
-    /// <param name="key">Ключ для вставки.</param>
+    /// <param name="node">РЈР·РµР» РґР»СЏ РІСЃС‚Р°РІРєРё.</param>
+    /// <param name="key">РљР»СЋС‡ РґР»СЏ РІСЃС‚Р°РІРєРё.</param>
     void InsertNotOptimized(TreapNode*& node, int key)
     {
         TreapNode* newNode = new TreapNode(key);
@@ -144,10 +145,10 @@ public:
     }
 
     /// <summary>
-    /// Удаляет элемент из дерева. (не оптимизирован)
+    /// РЈРґР°Р»СЏРµС‚ СЌР»РµРјРµРЅС‚ РёР· РґРµСЂРµРІР°. (РЅРµ РѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅ)
     /// </summary>
-    /// <param name="node">Узел для удаления</param>
-    /// <param name="key">Ключ для удаления.</param>
+    /// <param name="node">РЈР·РµР» РґР»СЏ СѓРґР°Р»РµРЅРёСЏ</param>
+    /// <param name="key">РљР»СЋС‡ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ.</param>
     void RemoveNotOptimized(TreapNode*& node, int key, bool& success)
     {
         TreapNode* less = nullptr;

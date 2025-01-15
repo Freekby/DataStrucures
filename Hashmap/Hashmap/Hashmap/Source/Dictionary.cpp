@@ -1,5 +1,5 @@
-﻿#include "Dictionary.h"
-#include <iostream>
+﻿#include <iostream>
+#include "../Header/Dictionary.h"
 
 Dictionary::Dictionary(size_t initialSize, double loadFactor)
     : _dictionary(initialSize, loadFactor) {}
@@ -8,7 +8,6 @@ void Dictionary::Add(const std::string& key, const std::string& value)
 {
     size_t index = _dictionary.GetIndex(key);
 
-    // TODO: Вынести в Dictionary.Add*
     for (Node* current = _dictionary.GetBucket(index); current != nullptr; current = current->next)
     {
         if (current->key == key)

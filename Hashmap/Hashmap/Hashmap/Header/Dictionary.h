@@ -8,7 +8,6 @@
 class Dictionary
 {
 private:
-    // TODO: Комментарии над комментируемом коде. Тоже можно использовать summary*
     /// <summary>
     /// Хранит данные словаря.
     /// </summary>
